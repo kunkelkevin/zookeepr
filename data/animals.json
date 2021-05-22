@@ -69,20 +69,6 @@
       "species": "Tiger",
       "diet": "carnivore",
       "personalityTraits": ["hungry"]
-    },
-    {
-      "name": "Larry",
-      "species": "Lemur",
-      "diet": "omnivore",
-      "personalityTraits": ["hungry", "goofy"],
-      "id": "10"
-    },
-    {
-      "name": "John Boy",
-      "species": "Hippopotamus",
-      "diet": "omnivore",
-      "personalityTraits": ["hungry"],
-      "id": "11"
     }
   ]
 }

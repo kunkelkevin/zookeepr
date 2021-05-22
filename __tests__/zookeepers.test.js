@@ -1,78 +1,74 @@
-const fs = require("fs");
+const fs = require('fs');
 const {
   filterByQuery,
   findById,
   createNewZookeeper,
-  validateZookeeper,
-} = require("../lib/zookeepers");
-const { zookeepers } = require("../data/zookeepers.json");
+  validateZookeeper
+} = require('../lib/zookeepers.js');
 
-jest.mock("fs");
+jest.mock('fs');
+test('creates an zookeeper object', () => {
+  const zookeeper = createNewZookeeper({ name: 'Darlene', id: 'jhgdja3ng2' }, []);
 
-test("Creates an zookeeper object", () => {
-  const zookeeper = createNewZookeeper(
-    { name: "Darlene", id: "2001a" },
-    zookeepers
-  );
-  expect(zookeeper.name).toBe("Darlene");
-  expect(zookeeper.id).toBe("2001a");
+  expect(zookeeper.name).toBe('Darlene');
+  expect(zookeeper.id).toBe('jhgdja3ng2');
 });
 
-test("Filters by query", () => {
+test('filters by query', () => {
   const startingZookeepers = [
     {
-      id: "3",
-      name: "Erica",
-      favoriteAnimal: "gorilla",
-      age: 32,
+      id: '2',
+      name: 'Raksha',
+      age: 31,
+      favoriteAnimal: 'penguin'
     },
     {
-      id: "4",
-      name: "Noel",
-      favoriteAnimal: "tiger",
-      age: 21,
-    },
+      id: '3',
+      name: 'Isabella',
+      age: 67,
+      favoriteAnimal: 'bear'
+    }
   ];
-  const updatedZookeepers = filterByQuery(
-    { favoriteAnimal: "gorilla" },
-    startingZookeepers
-  );
+
+  const updatedZookeepers = filterByQuery({ age: 31 }, startingZookeepers);
+
   expect(updatedZookeepers.length).toEqual(1);
 });
 
-test("finds by id", () => {
+test('finds by id', () => {
   const startingZookeepers = [
     {
-      id: "3",
-      name: "Erica",
-      favoriteAnimal: "gorilla",
-      age: 32,
+      id: '2',
+      name: 'Raksha',
+      age: 31,
+      favoriteAnimal: 'penguin'
     },
     {
-      id: "4",
-      name: "Noel",
-      favoriteAnimal: "tiger",
-      age: 21,
-    },
+      id: '3',
+      name: 'Isabella',
+      age: 67,
+      favoriteAnimal: 'bear'
+    }
   ];
 
-  const result = findById("3", startingZookeepers);
+  const result = findById('3', startingZookeepers);
 
-  expect(result.name).toBe("Erica");
+  expect(result.name).toBe('Isabella');
 });
 
-test("validates personality traits", () => {
+test('validates age', () => {
   const zookeeper = {
-    id: "3",
-    name: "Erica",
-    favoriteAnimal: "gorilla",
-    age: 32,
+    id: '2',
+    name: 'Raksha',
+    age: 31,
+    favoriteAnimal: 'penguin'
   };
 
   const invalidZookeeper = {
-    id: "3",
-    name: "Erica",
-    age: 32,
+    id: '3',
+    name: 'Isabella',
+    age: '67',
+    favoriteAnimal: 'bear'
   };
 
   const result = validateZookeeper(zookeeper);
